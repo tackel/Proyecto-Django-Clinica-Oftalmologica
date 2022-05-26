@@ -1,0 +1,24 @@
+django-admin startproject mi_proyecto
+
+python manage.py startapp nombre_app
+
+settings.py registrar app en INSTALLED_APP=['nombre_app', o 'Nombre_appConfig',]
+
+configurar idiomoa en settings.py ==> LANGUAGE_CODE = 'es-ar'
+
+registramos las urls en mi_proyecto/urls.py
+
+hacer las migraciones python manage.py makemigrations ==> migrate
+
+creamos superusuario python manage.py createsuperuser
+
+comprobar servidor python manage.py runserver
+
+ingresar localhost/admin/
+
+definimos los modelos en models.py y realizamos migraciones
+
+en admin.py importamos los modelos  from .models import Mi_modelo
+
+y los registramos admin.site.register(Mi_modelo)
+

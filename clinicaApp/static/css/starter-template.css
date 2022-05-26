@@ -1,0 +1,18 @@
+body {
+  padding-top: 5rem;
+  background: url('../img/optica.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+footer{
+  align-content: center;
+  text-align: center;
+  color: lightgray;
+  
+
+}

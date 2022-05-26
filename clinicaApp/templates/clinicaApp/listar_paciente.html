@@ -1,0 +1,39 @@
+{% extends 'clinicaApp/base.html' %} {% load static %}
+
+{% block contenido %}
+
+{% load crispy_forms_tags %}
+<div class="card text-center col-12 col-md-10 offset-md-2">
+
+    <div class="card-body">
+        <h1>Lista de pacientes de {{user.username}}</h1>
+
+        <table class="table-responsive">
+            <tr>
+                <th> nombre </th>
+                <th> Doctor </th>
+                <th> ultima visita </th>
+                <th> opcines </th>
+            </tr>
+            <tr>
+
+                {% for p in tabla %}
+                {% if perms.clinicaApp.view_gerencia or perms.clinicaApp.view_paciente_secre %}
+                    <td>{{ p.nombre}} {{ p.apellido }}</td>
+                    <td>{{ p.doctor.nombre.username }}  </td>
+                    <td>{{ p.ultima_visita }}</td>
+                    <td><a href="{% url 'modificar_paciente' p.id %} " class="btn btn-info">Modificar</a>
+                        <a href="{% url 'eliminar_paciente' p.id %} " class="btn btn-danger">Eliminar</a>
+
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+                
+    </div>
+
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,48 @@
+{% extends 'clinicaApp/base.html' %} {% load static %}
+
+{% block contenido %}
+
+
+{% load crispy_forms_tags %}
+<div class="card text-center col-12 col-md-10 offset-md-2">
+
+    <div class="card-body">
+        <h1>Lista de turnos</h1>
+
+        <table class="table-responsive">
+            <tr>
+                <th> paciente</th>
+                <th> fecha </th>
+                <th> medico </th>
+                <th>asistencia</th>
+                <th> opcines </th>
+            </tr>
+            <tr>
+                {% for p in turnos %}
+                {% if p.medico.nombre.username == user.username or perms.clinicaApp.view_gerencia or perms.clinicaApp.view_paciente_secre %}
+                <td>{{ p.paciente}}</td>
+                <td>{{ p.fecha}}</td>
+                <td>{{ p.medico }}</td>
+                <td>{{ p.concurrio }}</td>
+                <td>
+                    {% if perms.clinicaApp.change_turno %}
+                    <a href="{% url 'modificar_turno' p.id %} " class="btn btn-info">Modificar</a>
+                    {% endif %}
+                    {% if perms.clinicaApp.delete_turno %}
+                    <a href="{% url 'eliminar_turno' p.id %} " class="btn btn-danger">Eliminar</a>
+                    {% endif %}
+                    <a href="{% url 'pacienteXhistoria' p.paciente_id %}">
+                        <button type="button" class="btn btn-dark"> Ver Historial Medico</button></a>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+        
+        
+        {% endblock %}
+        
+                
+    </div>
+
+</div>

@@ -1,0 +1,64 @@
+{% extends 'clinicaApp/base.html' %} {% load static %}
+
+{% block contenido %}
+
+
+
+{% load crispy_forms_tags %}
+<div class="card text-center col-12 col-md-10 offset-md-2">
+
+    <div class="card-body">
+        <h1>Asistencia de turno semanal </h1>
+        <section>
+        
+            <h4> <a href="{% url 'gerencia' %} " class="btn btn-info">Vovler</a></h4>
+        </section>
+        <table class="table-responsive">
+            <h2>Asistieron</h2>
+            <tr>
+                <th> paciente</th>
+                <th> fecha </th>
+                <th> medico </th>
+                <th>asistencia</th>
+            </tr>
+            <tr>
+            {% for p in filtroFecha %}
+                {% if p.concurrio == "si" %}
+                <td>{{ p.paciente}}</td>
+                <td>{{ p.fecha}}</td>
+                <td>{{ p.medico }}</td>
+                <td>{{ p.concurrio }}</td>
+                
+                {% endif %}
+        
+            </tr>
+            {% endfor %}
+        </table>
+        
+        
+        <table class="table-responsive">
+            <h2>No Asistieron</h2>
+            <tr>
+                <th> paciente</th>
+                <th> fecha </th>
+                <th> medico </th>
+                <th>asistencia</th>
+            </tr>
+            <tr>
+            {% for p in filtroFecha %}
+                {% if p.concurrio == "no" %}
+                <td>{{ p.paciente}}</td>
+                <td>{{ p.fecha}}</td>
+                <td>{{ p.medico }}</td>
+                <td>{{ p.concurrio }}</td>
+                
+                {% endif %}
+        
+           
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+
+</div>
+{% endblock %} 

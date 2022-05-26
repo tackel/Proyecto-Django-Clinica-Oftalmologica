@@ -1,0 +1,50 @@
+{% extends 'clinicaApp/base.html' %} {% load static %}
+
+{% block contenido %}
+
+
+
+{% load crispy_forms_tags %}
+<div class="card text-center col-12 col-md-10 offset-md-2">
+
+    <div class="card-body">
+        <h1>Historia medica</h1>
+
+        {% if not tabla %}
+        <a href="{% url 'agregar_historia'%} " class="btn btn-info">Agregar Historial Medico</a>
+        {% else %}
+    
+    
+    <section>
+        <div style="width: 60%; background-color: orangered; margin:auto;text-align: center; color:white;">
+    
+            <h4>Historia del paciente: {{historiaPaciente}}</h4>
+            
+            
+            
+    
+        </div>
+    </section>
+    <table class="table-responsive">
+        
+        <a href="{% url 'listar_paciente' %} " class="btn btn-info">Volver</a>
+    
+        {% for p in tabla %}
+        <th><a href="{% url 'modificar_historia' p.id %} " class="btn btn-info">Modificar</a></th>
+    
+        <tr>
+            <td>{{ p.historial_medico}}</td>
+        </tr>
+    
+        
+        {% endfor %}
+    </table>
+        {% endif %}
+    
+    
+    {% endblock %}
+    
+            
+    </div>
+
+</div>

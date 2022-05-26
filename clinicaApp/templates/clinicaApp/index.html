@@ -1,0 +1,83 @@
+{% extends 'clinicaApp/base.html' %} {% load static %}
+
+{% block contenido %}
+
+
+
+{% load crispy_forms_tags %}
+{% if not user.is_authenticated %}
+<div class="card text-center col-12 col-md-6 offset-md-3">
+
+    <div class="card-body">
+        <h2 class="card-title">Bienvenido al Sistema de Gestion de Clinica</h2>
+        <h3><a class="dropdown-item" href="{% url 'login'%}" >Inicia sesion para continuar</a></h3>
+    </div>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<!-- --------------aca va un if si esta o no logueado---------- -->
+{% else %}
+<br>
+
+
+<div class="row row-cols-1 row-cols-md-3">
+    <div class="col mb-4">
+        <div class="card h-100">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Turnos</h5>
+                <a class="dropdown-item" href="{% url 'turnos'%}">Agregar Turnos</a>
+                <a class="dropdown-item" href="{% url 'listar_turnos'%}">Lista de Turnos</a>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-4">
+        <div class="card h-100">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Pedidos</h5>
+                <a class="dropdown-item" href="{% url 'agregar_pedido'%}">Agregar Pedido</a>
+                <a class="dropdown-item" href="{% url 'listar_pedidos'%}">Lista de Pedidos</a>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-4">
+        <div class="card h-100">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Productos</h5>
+                <a class="dropdown-item" href="{% url 'agregar_producto'%}">Agregar Productos</a>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-4">
+        <div class="card h-100">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Pacientes</h5>
+                <a class="dropdown-item" href="{% url 'agregar_paciente'%}">Agregar Paciente</a>
+                <a class="dropdown-item" href="{% url 'listar_paciente'%}">Lista de Pacientes</a>
+                <a class="dropdown-item" href="{% url 'listar_turnos2'%}">Lista de Pacientes por fecha</a>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-4">
+        <div class="card h-100">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Gerencia</h5>
+                <a class="dropdown-item" href="{% url 'gerencia'%}">Reportes</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

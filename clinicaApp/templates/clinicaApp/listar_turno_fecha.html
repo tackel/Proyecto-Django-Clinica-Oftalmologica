@@ -1,0 +1,36 @@
+{% extends 'clinicaApp/base.html' %} {% load static %}
+
+{% block contenido %}
+
+
+{% load crispy_forms_tags %}
+<div class="card text-center col-12 col-md-10 offset-md-2">
+
+    <div class="card-body">
+        <h1>Turnos de la ultima semana</h1>
+        <section>
+        
+            <h4> <a href="{% url 'gerencia' %} " class="btn btn-info">Volver</a></h4>
+        </section>
+        <table class="table-responsive">
+            <tr>
+                <th> paciente</th>
+                <th> fecha </th>
+                <th> medico </th>
+                <th>asistencia</th>
+            </tr>
+            <tr>
+            {% for p in filtroFecha %}
+                <td>{{ p.paciente}}</td>
+                <td>{{ p.fecha}}</td>
+                <td>{{ p.medico }}</td>
+                <td>{{ p.concurrio }}</td>
+        
+            </tr>
+            {% endfor %}
+        </table>
+        {% endblock %}
+                
+    </div>
+
+</div>

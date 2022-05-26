@@ -1,0 +1,45 @@
+{% extends 'clinicaApp/base.html' %} {% load static %}
+
+{% block contenido %}
+
+
+<div class="card text-center col-12 col-md-6 offset-md-3">
+
+    <div class="card-body">
+        <h2 class="card-title">Gerencia</h2>
+
+        <section>
+        
+            <h4>Filtrar Turnos: </h4>
+
+                <a href="{% url 'listar_turno_fecha' %} " class="btn btn-info">Ultimos 7 dias</a>
+
+                <a href="{% url 'listar_turno_fecha30' %} " class="btn btn-info">Elegir Mes</a>
+                <br>
+                <hr>
+            <h4>Asistencia semana/mes</h4>
+
+                <a href="{% url 'listar_turno_concurrio_semana' %} " class="btn btn-info"> Ultimos 7 dias</a>
+                
+                <a href="{% url 'listar_turno_concurrio_mes' %} " class="btn btn-info"> Elegir Mes</a><br>
+                <hr>
+            <h4>Pacientes que hicieron pedidos</h4>
+                
+                <a href="{% url 'listar_pedido_fecha' %} " class="btn btn-info">Ultimos 7 dias</a>
+                
+                <a href="{% url 'listar_pedido_fecha30' %} " class="btn btn-info">Elegir Mes</a>
+                <br>
+                <hr>
+            <h4>Ventas</h4>
+                
+                <a href="{% url 'listar_productos_vendidos' %} " class="btn btn-info">Elegir Mes</a>
+
+                <a href="{% url 'listar_productos_vendidos_vendedor' %} " class="btn btn-info">Ventas mensuales por vendedor</a>
+                <br>
+        </section>
+    
+        
+    </div>
+
+</div>
+{% endblock %}

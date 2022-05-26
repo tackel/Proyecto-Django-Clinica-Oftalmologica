@@ -1,0 +1,88 @@
+{% extends 'clinicaApp/base.html' %} {% load static %}
+
+{% block contenido %}
+
+
+
+{% load crispy_forms_tags %}
+<div class="card text-center col-12 col-md-10 offset-md-2">
+
+    <div class="card-body">
+        <h1>Lista de Pedidos</h1>
+        <h2>Seleccionar Paciente para ver todos sus pedidos</h2>
+        
+        
+        <table class="table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">paciente</th>
+                    <th scope="col">producto</th>
+                    <th scope="col">Lejos/Cerca</th>
+                    <th scope="col">Izquierda/Derecha</th>
+                    <th scope="col">Marco</th>
+                    {% if perms.clinicaApp.view_precio %} 
+                    <th scope="col">precio</th>
+                    {% endif %}
+                    <th scope="col">forma_de_Pago</th>
+                    <th scope="col">estado del pedido</th>
+                    <th scope="col">vendedor</th>
+                    <th scope="col">opciones</th>
+        
+                </tr>
+            </thead>
+            {% for p in pedidos %}
+            <tbody>
+                <tr>
+                    <td><a href="{% url 'pedidosXpaciente' p.paciente_id %}"> {{p.paciente}} </a></td>
+                    <td>{{p.producto}}</td>
+                    <td>{{p.Cerca_o_Lejos}}</td>
+                    <td>{{p.Derecha_o_Izquierda}}</td>
+                    <td>{{p.Marco}}</td>
+                    {% if perms.clinicaApp.view_precio %} 
+                    <td>{{p.precio}}</td>
+                    {% endif %}
+                    <td>{{p.forma_de_Pago}}</td>
+                    <td>{{p.estado_del_pedido}}</td>
+                    <td>{{p.vendedor}} </td>
+                </tr>
+                <tr>
+                    <td>{% if perms.clinicaApp.view_precio %}
+                        <a href="{% url 'modificar_pedido' p.id %} " class="btn btn-info">Modificar</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'eliminar_pedido' p.id %} " class="btn btn-danger">Eliminar</a>
+                    </td>
+                    <td>        {% if p.estado_del_pedido != 'pedido' %}
+                        <form action="{% url 'estado_pedido' p.id %}" method="GET">
+                            <input type="submit" name="pedido" class="btn btn-primary pull-right" value="Pedido"/>
+                        </form>
+                            {% endif %}
+                    </td>
+                    <td>        {% if p.estado_del_pedido != 'taller' %}
+                        <form action="{% url 'estado_pedido' p.id %}" method="GET">
+                            <input type="submit" name="taller" class="btn btn-primary pull-right" value="Taller"/>
+                        </form>
+                        {% endif %}
+                        {% endif %}
+                    </td>
+                    <td>        {% if p.estado_del_pedido != 'finalizado' and not perms.clinicaApp.view_precio%}
+                        <form action="{% url 'estado_pedido' p.id %}" method="GET">
+                            <input type="submit" name="finalizado" class="btn btn-primary pull-right" value="Finalizado"/>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                
+            </tbody>
+            {% endfor %}
+        </table>
+        {% if perms.clinicaApp.view_precio %} 
+        <p>Subtotal de todos los pedidos: ${{total.precio__sum}}</p>
+        {% endif %}
+                
+    </div>
+
+</div>
+
+{% endblock %}
+

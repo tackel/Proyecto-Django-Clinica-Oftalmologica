@@ -1,0 +1,175 @@
+{% load static %}
+<!doctype html>
+<html lang="es-ar">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Starter Template · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/starter-template/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        body {
+            padding-top: 5rem;
+        }
+
+        .starter-template {
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/starter-template.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{% url 'index' %}">Inicio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                {% if perms.clinicaApp.view_turno %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">Turnos</a>
+                    <div class="dropdown-menu">
+                        {% if perms.clinicaApp.add_turno %}
+                        <a class="dropdown-item" href="{% url 'turnos'%}">Agregar Turnos</a>
+                        {% endif %}
+                        {% if perms.clinicaApp.view_turno %}
+                        <a class="dropdown-item" href="{% url 'listar_turnos'%}">Lista de Turnos</a>
+                        {% endif %}
+
+                    </div>
+                </li>
+                {% endif %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">Pedidos</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'agregar_pedido'%}">Agregar Pedido</a>
+                        <a class="dropdown-item" href="{% url 'listar_pedidos'%}">Lista de Pedidos</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">Productos</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'agregar_producto'%}">Agregar Productos</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">Pacientes</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'agregar_paciente'%}">Agregar Paciente</a>
+                        <a class="dropdown-item" href="{% url 'listar_paciente'%}">Lista de Pacientes</a>
+                        <a class="dropdown-item" href="{% url 'listar_turnos2'%}">Lista de Pacientes por fecha</a>
+                    </div>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="{% url 'gerencia'%}" role="button" aria-haspopup="true"
+                        aria-expanded="false">Gerencia</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="{% url 'logout'%}" role="button" aria-haspopup="true"
+                        aria-expanded="false">Cerrar sesion</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">@{{ user.username }}</a>
+                </li>
+                {% else %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown" href="{% url 'login'%}" role="button" aria-haspopup="true"
+                        aria-expanded="false">Iniciar sesion</a>
+                </li>
+                {% endif %}
+
+
+            </ul> 
+        </div>
+    </nav>
+
+    <main role="main" class="container">
+
+        <div class="starter-template">
+            {% block contenido %}
+            {% endblock %}
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    </main>
+
+
+    <!-- ------footer----- -->
+    <footer class="bg-dark p-4" style="padding-top: 80%;" >
+        <div class="text-center">
+        <br>
+        <div class="container">
+			<p class="m-0">
+				<a href="#" class="link">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+				<a href="#" class="link">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+				<a href="#" class="link">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			</p>
+			<p class="m-0 mbt">
+				<a href="sample.html" class="link">Política de privacidad</a> ·
+				<a href="sample.html" class="link">Aviso legal</a> ·
+				<a href="sample.html" class="link">Cookies</a>
+			</p>
+			<p class="m-0 mbt1">&copy; Franco Rossi y Fernando Verri - Gestion Clinica optometria 2020</p>
+		</div>
+
+        </div>
+    </footer>
+
+</body>
+
+</html>

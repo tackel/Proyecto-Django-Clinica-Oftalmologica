@@ -1,0 +1,48 @@
+{% extends 'clinicaApp/base.html' %} {% load static %}
+
+{% block contenido %}
+
+
+{% load crispy_forms_tags %}
+<div class="card text-center col-12 col-md-10 offset-md-2">
+
+    <div class="card-body">
+        <h1>Turnos Filtrados por Mes</h1>
+
+<form method='POST'>
+    {% csrf_token %}
+    <label for="mes">Selecciones mes:</label>
+    <input type="month" id="mes" name="mes">
+    {{ FiltrarForm2 }}
+
+    <button type="submit"class="btn btn-lg btn-secondary">Enviar</button>
+</form>
+{% if mes %}
+<h4> Usted ha filtrado el mes: {{ mes }} del año: {{ año }}  </h4>
+{% endif %}
+<section>
+
+    <h4> <a href="{% url 'gerencia' %} " class="btn btn-info">Vovler</a></h4>
+</section>
+<table class="table-responsive">
+    <tr>
+        <th> paciente</th>
+        <th> fecha </th>
+        <th> medico </th>
+        <th>asistencia</th>
+    </tr>
+    <tr>
+    {% for p in filtroOrd %}
+        <td>{{ p.paciente}}</td>
+        <td>{{ p.fecha}}</td>
+        <td>{{ p.medico }}</td>
+        <td>{{ p.concurrio }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+        {% endblock %}
+                
+    </div>
+
+</div>

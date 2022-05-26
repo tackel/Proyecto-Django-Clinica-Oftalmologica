@@ -1,0 +1,40 @@
+{% extends 'clinicaApp/base.html' %} {% load static %}
+
+{% block contenido %}
+
+
+
+
+
+
+{% load crispy_forms_tags %}
+<div class="card text-center col-12 col-md-10 offset-md-2">
+
+    <div class="card-body">
+
+        <h3>Pacientes que hicieron pedidos en los ultimos 7 dias</h3>
+        <section>
+        
+            <h4> <a href="{% url 'gerencia' %} " class="btn btn-info">Vovler</a></h4>
+        
+        </section>
+        <table class="table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre y Apellido</th>
+                    
+                </tr>
+            </thead>
+            {% for p in a %}
+            <tbody>
+                <tr>
+                    <td>{{p}}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>        
+    </div>
+
+</div>
+{% endblock %}
+
